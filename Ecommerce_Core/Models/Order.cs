@@ -16,7 +16,7 @@ namespace Ecommerce_Core.Models
         public double TotalPrice { get; set; }
         public string Status { get; set; } // New, In Progress, Completed
         public DateTime CreatedAt { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderProducts> OrderItems { get; set; }
     }
 
 }

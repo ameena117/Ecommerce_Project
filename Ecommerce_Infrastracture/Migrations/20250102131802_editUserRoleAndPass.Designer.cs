@@ -4,6 +4,7 @@ using Ecommerce_Infrastracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_Infrastracture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250102131802_editUserRoleAndPass")]
+    partial class editUserRoleAndPass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +40,30 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("Ecommerce_Core.Models.CartItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Category", b =>
@@ -85,7 +111,7 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Ecommerce_Core.Models.OrderProducts", b =>
+            modelBuilder.Entity("Ecommerce_Core.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +137,7 @@ namespace Ecommerce_Infrastracture.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProducts");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Payment", b =>
@@ -171,42 +197,13 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubCategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SellerId");
 
-                    b.HasIndex("SubCategoryId");
-
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Ecommerce_Core.Models.ProductsCart", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductsCarts");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Review", b =>
@@ -240,28 +237,6 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("Ecommerce_Core.Models.SubCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("SubCategories");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.User", b =>
@@ -488,6 +463,25 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Ecommerce_Core.Models.CartItem", b =>
+                {
+                    b.HasOne("Ecommerce_Core.Models.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce_Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Ecommerce_Core.Models.Order", b =>
                 {
                     b.HasOne("Ecommerce_Core.Models.User", "User")
@@ -499,7 +493,7 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Ecommerce_Core.Models.OrderProducts", b =>
+            modelBuilder.Entity("Ecommerce_Core.Models.OrderItem", b =>
                 {
                     b.HasOne("Ecommerce_Core.Models.Order", "Order")
                         .WithMany("OrderItems")
@@ -543,36 +537,9 @@ namespace Ecommerce_Infrastracture.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ecommerce_Core.Models.SubCategory", "SubCategory")
-                        .WithMany("Products")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
 
                     b.Navigation("Seller");
-
-                    b.Navigation("SubCategory");
-                });
-
-            modelBuilder.Entity("Ecommerce_Core.Models.ProductsCart", b =>
-                {
-                    b.HasOne("Ecommerce_Core.Models.Cart", "Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ecommerce_Core.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Review", b =>
@@ -592,17 +559,6 @@ namespace Ecommerce_Infrastracture.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Ecommerce_Core.Models.SubCategory", b =>
-                {
-                    b.HasOne("Ecommerce_Core.Models.Category", "Category")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -664,18 +620,11 @@ namespace Ecommerce_Infrastracture.Migrations
             modelBuilder.Entity("Ecommerce_Core.Models.Category", b =>
                 {
                     b.Navigation("Products");
-
-                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("Ecommerce_Core.Models.SubCategory", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.User", b =>

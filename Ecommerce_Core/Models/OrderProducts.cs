@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_Core.Models
 {
-    public class OrderItem
+    public class OrderProducts
     {
         public int Id { get; set; }
         [ForeignKey(nameof(Order))]

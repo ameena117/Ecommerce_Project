@@ -30,6 +30,8 @@ namespace Ecommerce_API.Controllers
                 UserName = registerDto.Username,
                 Name = registerDto.FullName,
                 Email = registerDto.Email,
+                Role = "Buyer", 
+                CreatedAt = DateTime.UtcNow
             };
 
             var result = await _authRepository.RegisterAsync(user, registerDto.Password);
@@ -108,7 +110,7 @@ namespace Ecommerce_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _authRepository.ChangePasswordAsync(changePasswordDto.email, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+            var result = await _authRepository.ChangePasswordAsync(changePasswordDto.Email, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
 
             if (result == "Password changed successfully.")
             {

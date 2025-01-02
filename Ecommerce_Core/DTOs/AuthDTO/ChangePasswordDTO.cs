@@ -10,7 +10,7 @@ namespace Ecommerce_Core.DTOs.AuthDTO
     public class ChangePasswordDTO
     {
         [Required]
-        public string email { get; set; }  // User ID to change the password for
+        public string Email { get; set; }  // User ID to change the password for
 
         [Required]
         public string OldPassword { get; set; }

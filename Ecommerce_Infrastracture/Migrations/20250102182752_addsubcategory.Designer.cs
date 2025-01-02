@@ -4,6 +4,7 @@ using Ecommerce_Infrastracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_Infrastracture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250102182752_addsubcategory")]
+    partial class addsubcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace Ecommerce_Infrastracture.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProducts");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Payment", b =>
@@ -206,7 +208,7 @@ namespace Ecommerce_Infrastracture.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductsCarts");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Review", b =>

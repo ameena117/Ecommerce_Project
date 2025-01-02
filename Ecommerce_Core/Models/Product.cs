@@ -17,6 +17,11 @@ namespace Ecommerce_Core.Models
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
+        [ForeignKey(nameof(SubCategory))]
+        public int SubCategoryId { get; set; }
+        public SubCategory SubCategory { get; set; }
+
         [ForeignKey(nameof(User))]
         public int SellerId { get; set; }
         public User Seller { get; set; }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_Core.Models
 {
-    public class CartItem
+    public class ProductsCart
     {
         public Guid Id { get; set; }
-
+         
         [ForeignKey(nameof(Cart))]
         public int CartId { get; set; }
         public Cart Cart { get; set; }

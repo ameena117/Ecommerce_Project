@@ -31,23 +31,24 @@ namespace Ecommerce_API
             });
 
             // Configure ASP.NET Identity
-            
-            //builder.Services.AddIdentity<Users, IdentityRole<int>>(options =>
-            //{
-            //    options.Password.RequireDigit = true;
-            //    options.Password.RequireLowercase = true;
-            //    options.Password.RequireUppercase = true;
-            //    options.Password.RequireNonAlphanumeric = false;  // Optional: change based on your policy
-            //    options.Password.RequiredLength = 6;  // Minimum length of the password
-            //    options.Password.RequiredUniqueChars = 1; // Unique characters in the password
-            //})
-            //.AddEntityFrameworkStores<AppDbContext>()
-            //.AddDefaultTokenProviders();
+
+            builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
+            {
+                //options.Password.RequireDigit = true;
+                //options.Password.RequireLowercase = true;
+                //options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;  // Optional: change based on your policy
+                options.Password.RequiredLength = 6;  // Minimum length of the password
+                //options.Password.RequiredUniqueChars = 1; // Unique characters in the password
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
             // Register AuthRepository as the implementation of IAuthRepository
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             //builder.Services.AddScoped<IItemsRepository, ItemsRepository>();
             //builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
+            
             //builder.Services.AddAutoMapper(typeof(Mapping_Profile));
             //// تسجيل AutoMapper
             //// تسجيل TypeAdapterConfig بشكل صحيح ليكون موجودًا في DI container

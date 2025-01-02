@@ -12,7 +12,7 @@ namespace Ecommerce_Core.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        //public string Password { get; set; }
         public string Role { get; set; } // Admin, Seller, Buyer
         public DateTime CreatedAt { get; set; }
         public ICollection<Order> Orders { get; set; }
