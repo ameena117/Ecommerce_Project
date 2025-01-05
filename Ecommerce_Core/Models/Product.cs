@@ -14,6 +14,9 @@ namespace Ecommerce_Core.Models
         public string Description { get; set; }
         public double Price { get; set; }
         public int Stock { get; set; }
+
+        //public img 
+
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
@@ -25,7 +28,8 @@ namespace Ecommerce_Core.Models
         [ForeignKey(nameof(User))]
         public int SellerId { get; set; }
         public User Seller { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastUpdatedAt { get; set; }
     }
 
 }

@@ -46,9 +46,14 @@ namespace Ecommerce_API
 
             // Register AuthRepository as the implementation of IAuthRepository
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
+            builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+            builder.Services.AddScoped<ISubCategoryRepo, SubCategoryRepo>();
+            builder.Services.AddScoped<IProductRepo, ProductRepo>();
+            builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+
             //builder.Services.AddScoped<IItemsRepository, ItemsRepository>();
             //builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
-            
+
             //builder.Services.AddAutoMapper(typeof(Mapping_Profile));
             //// تسجيل AutoMapper
             //// تسجيل TypeAdapterConfig بشكل صحيح ليكون موجودًا في DI container
