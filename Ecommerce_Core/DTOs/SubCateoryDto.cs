@@ -9,6 +9,7 @@ namespace Ecommerce_Core.DTOs
 {
     public class SubCateoryDto
     {
+        [Required(ErrorMessage = "Category Id required")]
         public int? CategoryId { get; set; }  
 
         [Required(ErrorMessage = "Sub Category name is required")]

@@ -50,6 +50,9 @@ namespace Ecommerce_API
             builder.Services.AddScoped<ISubCategoryRepo, SubCategoryRepo>();
             builder.Services.AddScoped<IProductRepo, ProductRepo>();
             builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+            builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
+            builder.Services.AddScoped<ICartRepo, CartRepo>();
+            builder.Services.AddScoped<IPaymentRepo, PaymentRepo>();
 
             //builder.Services.AddScoped<IItemsRepository, ItemsRepository>();
             //builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();

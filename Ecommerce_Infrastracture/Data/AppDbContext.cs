@@ -42,7 +42,7 @@ namespace Ecommerce_Infrastracture.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<ProductsCart> ProductsCarts { get; set; }
+        public DbSet<CartProducts> CartProducts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProducts> OrderProducts { get; set; }
         public DbSet<Payment> Payments { get; set; }

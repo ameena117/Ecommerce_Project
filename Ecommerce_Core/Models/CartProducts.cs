@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_Core.Models
 {
-    public class ProductsCart
+    public class CartProducts
     {
         public Guid Id { get; set; }
          
@@ -19,6 +19,7 @@ namespace Ecommerce_Core.Models
         public int ProductId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public double Price { get; set; }
     }
 
 }

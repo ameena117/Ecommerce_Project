@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ecommerce_Core.DTOs
 {
-    public class CartDto
+    public class ReviewDto
     {
         public int Id { get; set; }
-
-        [Required(ErrorMessage ="User Id required")]
+        public int ProductId { get; set; }
         public int UserId { get; set; }
-        public List<CartProductDto> CartProducts { get; set; }
+        public int Rating { get; set; } // Value between 1 and 5
+        public string Comment { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

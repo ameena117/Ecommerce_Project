@@ -4,6 +4,7 @@ using Ecommerce_Infrastracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_Infrastracture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250115090732_updatenames")]
+    partial class updatenames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +50,6 @@ namespace Ecommerce_Infrastracture.Migrations
 
                     b.Property<int>("CartId")
                         .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -497,7 +496,7 @@ namespace Ecommerce_Infrastracture.Migrations
             modelBuilder.Entity("Ecommerce_Core.Models.CartProducts", b =>
                 {
                     b.HasOne("Ecommerce_Core.Models.Cart", "Cart")
-                        .WithMany("CartProducts")
+                        .WithMany("CartItems")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -664,7 +663,7 @@ namespace Ecommerce_Infrastracture.Migrations
 
             modelBuilder.Entity("Ecommerce_Core.Models.Cart", b =>
                 {
-                    b.Navigation("CartProducts");
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("Ecommerce_Core.Models.Category", b =>
