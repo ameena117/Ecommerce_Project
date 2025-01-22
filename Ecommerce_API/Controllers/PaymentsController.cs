@@ -1,6 +1,8 @@
 ﻿using Ecommerce_Core.DTOs;
 using Ecommerce_Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Ecommerce_API.Controllers
 {
@@ -19,7 +21,7 @@ namespace Ecommerce_API.Controllers
         public async Task<IActionResult> GetAllPayments()
         {
             var payments = await _paymentRepo.GetAllPaymentsAsync();
-            if (!payments.Any()) return NoContent();
+            if (payments.Count == 0) return NoContent();
 
             return Ok(payments);
         }
@@ -57,5 +59,15 @@ namespace Ecommerce_API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("get-user-payments/{userId}")]
+        public async Task<IActionResult> GetUserPayments(int userId)
+        {
+            var payments = await _paymentRepo.GetPaymentsByUserIdAsync(userId);
+            if (payments.Count == 0) return NoContent();
+
+            return Ok(payments);
+        }
+
     }
 }

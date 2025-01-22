@@ -14,5 +14,7 @@ namespace Ecommerce_Core.Interfaces
         Task<string> AddPaymentAsync(PaymentDto paymentDto);
         Task<string> UpdatePaymentAsync(Guid id, PaymentDto paymentDto);
         Task<string> DeletePaymentAsync(Guid id);
+        Task<List<PaymentDto>> GetPaymentsByUserIdAsync(int userId);
+
     }
 }

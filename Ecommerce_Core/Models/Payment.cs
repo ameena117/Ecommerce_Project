@@ -14,8 +14,12 @@ namespace Ecommerce_Core.Models
         [ForeignKey(nameof(Order))]
         public int OrderId { get; set; }
         public Order Order { get; set; }
+
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime PaymentDate { get; set; }
         public String PaymentMethod { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
     }
 }
